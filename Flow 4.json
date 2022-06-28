@@ -1,0 +1,256 @@
+[
+    {
+        "id": "b016c6fe5548a188",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7ff1b3368137bcab",
+        "type": "mqtt in",
+        "z": "b016c6fe5548a188",
+        "name": "",
+        "topic": "codigoIoT/g9/mosquitto/msg",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b19cfbfb792f6aa6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 160,
+        "wires": [
+            [
+                "acd0494d447a0c77",
+                "838ff2e38ba482cf"
+            ]
+        ]
+    },
+    {
+        "id": "acd0494d447a0c77",
+        "type": "json",
+        "z": "b016c6fe5548a188",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 410,
+        "y": 160,
+        "wires": [
+            [
+                "336e31d9be014c84",
+                "14e2b3305c064dae"
+            ]
+        ]
+    },
+    {
+        "id": "336e31d9be014c84",
+        "type": "debug",
+        "z": "b016c6fe5548a188",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "14e2b3305c064dae",
+        "type": "function",
+        "z": "b016c6fe5548a188",
+        "name": "",
+        "func": "msg.topic = msg.payload.id;\nmsg.payload = msg.payload.temp;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 160,
+        "wires": [
+            [
+                "4f7f4ae881e33e16",
+                "4d5ee8dcd0e90a78"
+            ]
+        ]
+    },
+    {
+        "id": "4f7f4ae881e33e16",
+        "type": "ui_chart",
+        "z": "b016c6fe5548a188",
+        "name": "",
+        "group": "09a13e6e27ecc2c4",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "Temperatura de los alumnos",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "45",
+        "removeOlder": "20",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 860,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "400e5108df750f21",
+        "type": "inject",
+        "z": "b016c6fe5548a188",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "15",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"id\":\"Distraido\",\"temp\":30}",
+        "payloadType": "str",
+        "x": 110,
+        "y": 380,
+        "wires": [
+            [
+                "7ce33f51a2b61446"
+            ]
+        ]
+    },
+    {
+        "id": "7ce33f51a2b61446",
+        "type": "mqtt out",
+        "z": "b016c6fe5548a188",
+        "name": "",
+        "topic": "codigoIoT/g9/mosquitto/msg",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b19cfbfb792f6aa6",
+        "x": 440,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "838ff2e38ba482cf",
+        "type": "debug",
+        "z": "b016c6fe5548a188",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "4d5ee8dcd0e90a78",
+        "type": "debug",
+        "z": "b016c6fe5548a188",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "b19cfbfb792f6aa6",
+        "type": "mqtt-broker",
+        "name": "Broker G8",
+        "broker": "35.157.252.226",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "09a13e6e27ecc2c4",
+        "type": "ui_group",
+        "name": "Grupro grafica",
+        "tab": "ddd7ee63a754de65",
+        "order": 1,
+        "disp": true,
+        "width": "24",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ddd7ee63a754de65",
+        "type": "ui_tab",
+        "name": "Flow4",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
